@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api, clearToken } from './api';
 import Categories from './Categories';
-import Reports from './Reports';
+import Dashboard from './Dashboard';
 import Transactions from './Transactions';
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
     <div style={{ padding: 24 }}>
       <h1>Expense Tracker</h1>
       <button onClick={logout}>Log out</button>
-      <Reports version={version} />
+      <Dashboard version={version} />
       <Categories categories={categories} setCategories={setCategories} />
       <Transactions categories={categories} onChange={() => setVersion((v) => v + 1)} />
     </div>
