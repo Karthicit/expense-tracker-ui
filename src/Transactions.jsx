@@ -3,7 +3,7 @@ import { api } from './api';
 
 const today = () => new Date().toLocaleDateString('en-CA'); // yyyy-MM-dd in your local time
 
-export default function Transactions({ categories }) {
+export default function Transactions({ categories , onChange }) {
   const [transactions, setTransactions] = useState([]);
   const [form, setForm] = useState({
     amount: '',
@@ -44,6 +44,7 @@ export default function Transactions({ categories }) {
       });
       setForm({ ...form, amount: '', description: '' });
       await load();
+      onChange();
     } catch (err) {
       setError(err.message);
       setFieldErrors(err.fieldErrors || {});
