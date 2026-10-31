@@ -28,24 +28,47 @@ export default function Categories({ categories, setCategories }) {
   }
 
   return (
-    <section>
-      <h2>Categories</h2>
-      <form onSubmit={add}>
-        <input
-          placeholder="New category"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
-      {error && <p style={{ color: 'crimson' }}>{error}</p>}
-      <ul>
-        {categories.map((c) => (
-          <li key={c.id}>
-            {c.name} <button onClick={() => remove(c.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <div className="stack">
+      <h1>Categories</h1>
+
+      <section className="card">
+        <h2>Add a category</h2>
+        <form onSubmit={add} className="inline-form">
+          <div className="field grow">
+            <label htmlFor="category-name">Name</label>
+            <input
+              id="category-name"
+              placeholder="For example Food or Salary"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <button type="submit">Add category</button>
+        </form>
+        {error && <p className="error">{error}</p>}
+      </section>
+
+      <section className="card">
+        <h2>Your categories</h2>
+        {categories.length === 0 ? (
+          <p className="empty">No categories yet. Add one above, then use it in a transaction.</p>
+        ) : (
+          <div className="chip-list">
+            {categories.map((c) => (
+              <span className="chip" key={c.id}>
+                {c.name}
+                <button
+                  className="danger"
+                  onClick={() => remove(c.id)}
+                  aria-label={`Delete ${c.name}`}
+                >
+                  Delete
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
   );
 }
