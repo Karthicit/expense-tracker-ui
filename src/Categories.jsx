@@ -1,17 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { api } from './api';
 
-export default function Categories() {
-  const [categories, setCategories] = useState([]);
+export default function Categories({ categories, setCategories }) {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
-
-  // runs once when the component first appears
-  useEffect(() => {
-    api('/api/categories')
-      .then(setCategories)
-      .catch((e) => setError(e.message));
-  }, []);
 
   async function add(e) {
     e.preventDefault();
